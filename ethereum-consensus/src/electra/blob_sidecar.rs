@@ -1,6 +1,6 @@
 use crate::{
     crypto::{KzgCommitment, KzgProof},
-    deneb::SignedBeaconBlockHeader,
+    electra::SignedBeaconBlockHeader,
     primitives::{BlobIndex, Bytes32, Root},
     ssz::prelude::*,
     Error,

@@ -1,5 +1,5 @@
 use crate::{
-    deneb::blob_sidecar::VersionedHash, electra::ExecutionPayload,
+    electra::blob_sidecar::VersionedHash, electra::ExecutionPayload,
     execution_engine::PayloadRequest, primitives::Root,
 };
 

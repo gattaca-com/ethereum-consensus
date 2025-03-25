@@ -16,6 +16,8 @@ use crate::{
     Error,
 };
 
+use super::get_current_epoch;
+
 pub fn upgrade_to_electra<
     const SLOTS_PER_HISTORICAL_ROOT: usize,
     const HISTORICAL_ROOTS_LIMIT: usize,
@@ -31,7 +33,7 @@ pub fn upgrade_to_electra<
     const PENDING_PARTIAL_WITHDRAWALS_LIMIT: usize,
     const PENDING_CONSOLIDATIONS_LIMIT: usize,
 >(
-    state: &deneb::BeaconState<
+    state: &BeaconState<
         SLOTS_PER_HISTORICAL_ROOT,
         HISTORICAL_ROOTS_LIMIT,
         ETH1_DATA_VOTES_BOUND,
@@ -42,6 +44,9 @@ pub fn upgrade_to_electra<
         SYNC_COMMITTEE_SIZE,
         BYTES_PER_LOGS_BLOOM,
         MAX_EXTRA_DATA_BYTES,
+        PENDING_DEPOSITS_LIMIT,
+        PENDING_PARTIAL_WITHDRAWALS_LIMIT,
+        PENDING_CONSOLIDATIONS_LIMIT,
     >,
     context: &Context,
 ) -> Result<
@@ -62,7 +67,7 @@ pub fn upgrade_to_electra<
     >,
     Error,
 > {
-    let epoch = deneb::get_current_epoch(state, context);
+    let epoch = get_current_epoch(state, context);
     let latest_execution_payload_header = &state.latest_execution_payload_header;
     let latest_execution_payload_header = ExecutionPayloadHeader {
         parent_hash: latest_execution_payload_header.parent_hash.clone(),
