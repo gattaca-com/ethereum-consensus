@@ -11,6 +11,7 @@ use crate::{
 #[derive(
     Default, Debug, Clone, PartialEq, Eq, SimpleSerialize, serde::Serialize, serde::Deserialize,
 )]
+#[serde(deny_unknown_fields)]
 pub struct BlindedBeaconBlockBody<
     const MAX_PROPOSER_SLASHINGS: usize,
     const MAX_VALIDATORS_PER_COMMITTEE: usize,
